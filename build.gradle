@@ -12,7 +12,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0_ALPHA'
-group = 'tk.wosaj.zenhorizon'
+group = 'com.wosaj.zenhorizon'
 archivesBaseName = 'zenhorizon'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
@@ -86,6 +86,8 @@ jar {
             "Implementation-Vendor" :"zenhorizon"
         ])
     }
+
+//  rename 'mixin.refmap.json', 'zenhorizon.mixin-refmap.json'
 }
 
 jar.finalizedBy('reobfJar')

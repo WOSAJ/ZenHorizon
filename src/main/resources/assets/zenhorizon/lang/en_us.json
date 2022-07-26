@@ -1,4 +1,12 @@
 {
-  "item.zenhorizon.wand": "Wand",
-  "item.zenhorizon.metawings": "Metawings"
+  "itemGroup.zenhorizon": "Zen Horizon",
+
+  "command.zenhorizon.unknown": "Unknown error",
+  "command.zenhorizon.get.success":"%s has %s/%s Zen",
+  "command.zenhorizon.set.success":"%s's Zen was set to %s",
+  "command.zenhorizon.set.fail.toomuch": "Value is higher than max value",
+  "command.zenhorizon.setmax.success":"%s's max Zen was set to %s",
+
+  "item.zenhorizon.metawings": "Metawings",
+  "item.zenhorizon.potion_mask": "Potion mask"
 }

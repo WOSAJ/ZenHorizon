@@ -1,32 +1,47 @@
-package tk.wosaj.zenhorizon;
+package com.wosaj.zenhorizon;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.GameRules;
+import com.wosaj.zenhorizon.capability.CapabilityEvents;
+import com.wosaj.zenhorizon.entity.EntityTypes;
+import com.wosaj.zenhorizon.item.Items;
+import com.wosaj.zenhorizon.util.ZenHorizonCommand;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.theillusivec4.curios.api.SlotTypeMessage;
-import top.theillusivec4.curios.api.event.CurioEquipEvent;
-import top.theillusivec4.curios.api.event.CurioUnequipEvent;
+
+import javax.annotation.Nonnull;
 
 @Mod(ZenHorizon.MODID)
 public class ZenHorizon {
     public static final String MODID = "zenhorizon";
+    public static final ItemGroup GROUP = new ItemGroup(new TranslationTextComponent("itemGroup.zenhorizon").getString()) {
+        @OnlyIn(Dist.CLIENT)
+        @Nonnull
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Items.POTION_MASK.get());
+        }
+    };
 
     public ZenHorizon() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::onInterModEnqueue);
-        MinecraftForge.EVENT_BUS.addListener(this::onCurioEquip);
-        MinecraftForge.EVENT_BUS.addListener(this::onCurioUnequip);
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
+        MinecraftForge.EVENT_BUS.addListener(this::onRegisterCommands);
         MinecraftForge.EVENT_BUS.register(this);
-        Registers.items.register(modEventBus);
+        //CONTENT REGISTRATION
+        Items.register(modEventBus);
+        EntityTypes.register(modEventBus);
     }
 
     @SubscribeEvent
@@ -52,27 +67,7 @@ public class ZenHorizon {
     }
 
     @SubscribeEvent
-    public void onCurioEquip(CurioEquipEvent event) {
-        PlayerEntity player = (PlayerEntity) event.getEntity();
-        if(event.getStack().getItem().equals(Registers.metawings.get()) && !player.isCreative() && !player.isSpectator())
-            player.abilities.allowFlying = true;
-    }
-
-    @SubscribeEvent
-    public void onCurioUnequip(CurioUnequipEvent event) {
-        PlayerEntity player = (PlayerEntity) event.getEntity();
-        if(event.getStack().getItem().equals(Registers.metawings.get()) && !player.isCreative() && !player.isSpectator()) {
-            player.abilities.allowFlying = false;
-            player.abilities.isFlying = false;
-        }
-    }
-
-    @SubscribeEvent
-    public void onLivingDeath(LivingDeathEvent event) {
-        if(event.getEntity().getType().equals(EntityType.PLAYER)) {
-            PlayerEntity player = (PlayerEntity) event.getEntity();
-            if (!player.isCreative() && !player.isSpectator() && !event.getEntity().getEntityWorld().getGameRules().get(GameRules.KEEP_INVENTORY).get())
-                player.abilities.allowFlying = false;
-        }
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        ZenHorizonCommand.register(event.getDispatcher());
     }
 }
