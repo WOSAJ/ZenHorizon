@@ -7,7 +7,7 @@ license="Apache license v2.0"
     version="1.0_ALPHA"
     displayName="Zen Horizon"
     authors="WOSAJ"
-    description="Big techno-magic mod"
+    description="hjskdfjahsjfh"
 
     [[dependencies.zenhorizon]]
         modId="forge"
@@ -27,3 +27,10 @@ license="Apache license v2.0"
         versionRange="[0,)"
         ordering="NONE"
         side="BOTH"
+    [[dependencies.zenhorizon]]
+        modId="patchouli"
+        mandatory=true
+        versionRange="[0,)"
+        ordering="NONE"
+        side="BOTH"
+

@@ -5,11 +5,13 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 
 version = '1.0_ALPHA'
 group = 'com.wosaj.zenhorizon'
@@ -25,6 +27,8 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 zenhorizon {
@@ -66,13 +70,20 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven { url 'https://maven.blamejared.com' }
     maven { url = "https://maven.theillusivec4.top/" }
+    maven { url = 'https://cursemaven.com' }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.20'
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.8.1")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.8.1:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-50")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-50:api")
+    runtimeOnly fg.deobf("curse.maven:jei-238222:3681294")
+    compileOnly fg.deobf("curse.maven:jei-238222:3681294")
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 }
 
 jar {
@@ -83,14 +94,26 @@ jar {
             "Specification-Version": "1",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"zenhorizon"
+            "Implementation-Vendor" :"zenhorizon",
+            "MixinConfigs": "zenhorizon.mixins.json"
         ])
     }
-
-//  rename 'mixin.refmap.json', 'zenhorizon.mixin-refmap.json'
 }
 
 jar.finalizedBy('reobfJar')
+
+mixin {
+    add sourceSets.main, "ars_nouveau.refmap.json"
+}
+
+// Copied from Botania
+if (System.getProperty("idea.sync.active") == "true") {
+    afterEvaluate {
+        tasks.withType(JavaCompile).all {
+            it.options.annotationProcessorPath = files()
+        }
+    }
+}
 
 publishing {
     publications {
