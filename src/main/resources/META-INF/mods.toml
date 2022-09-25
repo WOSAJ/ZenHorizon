@@ -3,34 +3,36 @@ loaderVersion="[36,)"
 license="Apache license v2.0"
 
 [[mods]]
-    modId="zenhorizon"
-    version="1.0_ALPHA"
-    displayName="Zen Horizon"
-    authors="WOSAJ"
-    description="hjskdfjahsjfh"
+modId="zenhorizon"
+version="1.0_ALPHA"
+displayName="Zen Horizon"
+authors="WOSAJ"
+description="hjskdfjahsjfh"
 
     [[dependencies.zenhorizon]]
-        modId="forge"
-        mandatory=true
-        versionRange="[36,)"
-        ordering="NONE"
-        side="BOTH"
-    [[dependencies.zenhorizon]]
-        modId="minecraft"
-        mandatory=true
-        versionRange="[1.16.5,1.17)"
-        ordering="NONE"
-        side="BOTH"
-    [[dependencies.zenhorizon]]
-        modId="curios"
-        mandatory=true
-        versionRange="[0,)"
-        ordering="NONE"
-        side="BOTH"
-    [[dependencies.zenhorizon]]
-        modId="patchouli"
-        mandatory=true
-        versionRange="[0,)"
-        ordering="NONE"
-        side="BOTH"
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
 
+    [[dependencies.zenhorizon]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
+
+    [[dependencies.zenhorizon]]
+    modId="curios"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
+
+    [[dependencies.zenhorizon]]
+    modId="patchouli"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"

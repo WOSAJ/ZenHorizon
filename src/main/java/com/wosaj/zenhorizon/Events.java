@@ -1,13 +1,10 @@
 package com.wosaj.zenhorizon;
 
-import com.wosaj.zenhorizon.common.capability.CapabilityEvents;
 import com.wosaj.zenhorizon.common.util.ZenHorizonCommand;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-
-import static com.wosaj.zenhorizon.ZenHorizon.*;
 
 @Mod.EventBusSubscriber(modid = ZenHorizon.MODID)
 public final class Events {
@@ -15,7 +12,7 @@ public final class Events {
 
     @SubscribeEvent
     public static void onFMLCommonSetup(FMLCommonSetupEvent event) {
-        CapabilityEvents.setup();
+        //CapabilityEvents.setup();
     }
 
     @SubscribeEvent

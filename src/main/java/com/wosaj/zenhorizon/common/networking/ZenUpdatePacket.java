@@ -2,8 +2,9 @@ package com.wosaj.zenhorizon.common.networking;
 
 import com.wosaj.zenhorizon.ZenHorizon;
 import com.wosaj.zenhorizon.common.capability.Zen;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -22,20 +23,20 @@ public class ZenUpdatePacket {
         maxZen = cap.getMaxZen();
     }
 
-    public ZenUpdatePacket(PacketBuffer buffer) {
+    public ZenUpdatePacket(FriendlyByteBuf buffer) {
         zen = buffer.readInt();
         maxZen = buffer.readInt();
     }
 
-    public void encode(PacketBuffer buffer) {
+    public void encode(FriendlyByteBuf buffer) {
         buffer.writeInt(zen);
         buffer.writeInt(maxZen);
     }
 
     public void handle(Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            if(ZenHorizon.proxy.getPlayer() == null) return;
-            Zen.get(ZenHorizon.proxy.getPlayer()).ifPresent(cap -> {
+            if(Minecraft.getInstance().player == null) return;
+            Zen.get(Minecraft.getInstance().player).ifPresent(cap -> {
                 cap.setZen(zen);
                 cap.setMaxZen(maxZen);
             });

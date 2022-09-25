@@ -1,18 +1,15 @@
 package com.wosaj.zenhorizon;
 
-import com.wosaj.zenhorizon.common.entity.EntityTypes;
 import com.wosaj.zenhorizon.common.item.Items;
 import com.wosaj.zenhorizon.common.networking.Networking;
-import com.wosaj.zenhorizon.setup.*;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -24,13 +21,12 @@ import javax.annotation.Nonnull;
 @Mod(ZenHorizon.MODID)
 public final class ZenHorizon {
     public static final String MODID = "zenhorizon";
-    public static IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-    public static final ItemGroup GROUP = new ItemGroup(new TranslationTextComponent("itemGroup.zenhorizon").getString()) {
+    public static final CreativeModeTab GROUP = new CreativeModeTab(new TranslatableComponent("itemGroup.zenhorizon").getString()) {
         @OnlyIn(Dist.CLIENT)
         @Nonnull
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(Items.POTION_MASK.get());
         }
     };
@@ -42,7 +38,7 @@ public final class ZenHorizon {
         MinecraftForge.EVENT_BUS.register(this);
         //CONTENT REGISTRATION
         Items.register(modEventBus);
-        EntityTypes.register(modEventBus);
+        //EntityTypes.register(modEventBus);
     }
 
     @SubscribeEvent
