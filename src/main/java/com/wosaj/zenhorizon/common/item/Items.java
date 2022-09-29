@@ -1,6 +1,7 @@
 package com.wosaj.zenhorizon.common.item;
 
 import com.wosaj.zenhorizon.ZenHorizon;
+import com.wosaj.zenhorizon.common.item.curio.MetaWings;
 import com.wosaj.zenhorizon.common.item.curio.PotionMask;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,4 +15,5 @@ public final class Items {
     public static void register(IEventBus bus) {REG.register(bus);}
 
     public static final RegistryObject<Item> POTION_MASK = REG.register("potion_mask", PotionMask::new);
+    public static final RegistryObject<Item> METAWINGS = REG.register("metawings", MetaWings::new);
 }

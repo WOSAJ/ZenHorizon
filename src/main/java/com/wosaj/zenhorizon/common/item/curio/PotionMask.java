@@ -1,7 +1,6 @@
 package com.wosaj.zenhorizon.common.item.curio;
 
 import com.wosaj.zenhorizon.ZenHorizon;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -32,10 +31,8 @@ public class PotionMask extends Item implements ICurioItem {
                 stack.setDamageValue(stack.getDamageValue() + 1);
                 if(stack.getDamageValue() >= stack.getMaxDamage()) {
                     stack.shrink(1);
-                    player.getLevel().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 1F, 1F, true);
+                    player.getLevel().playSound(null, player.getOnPos(), SoundEvents.ITEM_BREAK, SoundSource.AMBIENT, 1F, 1F);
                 }
             });
     }
-
-
 }

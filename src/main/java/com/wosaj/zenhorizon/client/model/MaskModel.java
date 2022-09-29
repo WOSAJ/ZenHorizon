@@ -12,11 +12,11 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class StandardMaskModel<T extends Entity> extends AgeableListModel<T> {
+public class MaskModel<T extends Entity> extends AgeableListModel<T> {
 	public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ZenHorizon.MODID, "mask"), "mask");
 	public final ModelPart mask;
 
-	public StandardMaskModel(ModelPart root) {
+	public MaskModel(ModelPart root) {
 		this.mask = root.getChild("mask");
 	}
 
@@ -24,9 +24,9 @@ public class StandardMaskModel<T extends Entity> extends AgeableListModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("mask", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -32.0F, -4.1F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		partdefinition.addOrReplaceChild("mask", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.6F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition, 16, 16);
+		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override
@@ -47,12 +47,5 @@ public class StandardMaskModel<T extends Entity> extends AgeableListModel<T> {
 	@Override
 	protected Iterable<ModelPart> bodyParts() {
 		return ImmutableList.of();
-	}
-
-	public static LayerDefinition createLayer() {
-		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition part = mesh.getRoot();
-		part.addOrReplaceChild("mask", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -32.0F, -4.1F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
-		return LayerDefinition.create(mesh, 16, 16);
 	}
 }
