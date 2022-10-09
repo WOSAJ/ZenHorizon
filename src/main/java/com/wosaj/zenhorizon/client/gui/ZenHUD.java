@@ -22,12 +22,13 @@ public class ZenHUD extends GuiComponent {
         var lazyOptional = Zen.get(Minecraft.getInstance().player);
         lazyOptional.ifPresent(cap -> {
             if(!cap.canHasZen()) return;
+
+            var i = (int) ((cap.getZen()+0F)/cap.getMaxZen()*30+1);
+            RenderSystem.setShaderTexture(0, rl("/textures/gui/zen_hud.png"));
+            blit(poseStack, 0, 50-i, 16, 0, 16, i, 128, 128);
+
             RenderSystem.setShaderTexture(0, rl("/textures/gui/zen_hud.png"));
             blit(poseStack, 0, 20, 0, 0, 16, 64, 128, 128);
-            var i = (int) ((cap.getZen()+0F)/cap.getMaxZen()*30+1);
-            var j = 30-i;
-            RenderSystem.setShaderTexture(0, rl("/textures/gui/zen_hud.png"));
-            blit(poseStack, 0, 20+j, 16, 0, 16, i, 128, 128);
         });
     }
 

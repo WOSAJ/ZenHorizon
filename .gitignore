@@ -1,8 +1,7 @@
 # Project exclude paths
-/src/main/java/com/wosaj/zenhorizon/test/
+/src/main/java/com/wosaj/zenhorizon/GameTests.java
 /.gradle/
 /build/
 /build/classes/java/main/
 /.idea/
 /run/
-/src/main/java/com/wosaj/zenhorizon/test/

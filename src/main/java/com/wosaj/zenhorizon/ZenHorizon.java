@@ -15,7 +15,7 @@ import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 import javax.annotation.Nonnull;
 
@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 public final class ZenHorizon {
     public static final String MODID = "zenhorizon";
 
-    public static final CreativeModeTab GROUP = new CreativeModeTab(new TranslatableComponent("itemGroup.zenhorizon").getString()) {
+    public static final CreativeModeTab GROUP = new CreativeModeTab(new TranslatableComponent("zenhorizon").getString()) {
         @OnlyIn(Dist.CLIENT)
         @Nonnull
         @Override
@@ -45,23 +45,23 @@ public final class ZenHorizon {
     @SubscribeEvent
     public void onInterModEnqueue(InterModEnqueueEvent event) {
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("back").size(1).cosmetic().build());
+                () -> SlotTypePreset.BACK.getMessageBuilder().size(1).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("belt").size(1).cosmetic().build());
+                () -> SlotTypePreset.BELT.getMessageBuilder().size(1).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("body").size(1).cosmetic().build());
+                () -> SlotTypePreset.BODY.getMessageBuilder().size(1).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("bracelet").size(2).cosmetic().build());
+                () -> SlotTypePreset.BRACELET.getMessageBuilder().size(2).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("head").size(1).cosmetic().build());
+                () -> SlotTypePreset.HEAD.getMessageBuilder().size(1).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("hands").size(2).cosmetic().build());
+                () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("necklace").size(2).cosmetic().build());
+                () -> SlotTypePreset.NECKLACE.getMessageBuilder().size(2).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("ring").size(4).cosmetic().build());
+                () -> SlotTypePreset.RING.getMessageBuilder().size(4).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
-                () -> new SlotTypeMessage.Builder("charm").size(2).cosmetic().build());
+                () -> SlotTypePreset.CHARM.getMessageBuilder().size(2).cosmetic().build());
     }
 
     //UTIL

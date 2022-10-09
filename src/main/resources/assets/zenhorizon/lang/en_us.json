@@ -5,7 +5,7 @@
   "command.zenhorizon.get.success":"%s has %s/%s Zen",
   "command.zenhorizon.set.success":"%s's Zen was set to %s",
   "command.zenhorizon.set.fail.toomuch": "Value is higher than max value",
-  "command.zenhorizon.setmax.success":"%s's max Zen was set to %s",
+  "command.zenhorizon.setmax.success":"%s's max Zen set to %s",
 
   "item.zenhorizon.metawings": "Metawings",
   "item.zenhorizon.potion_mask": "Potion mask"

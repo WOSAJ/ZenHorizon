@@ -1,9 +1,0 @@
-{
-  "loader": "zenhorizon:wand_loader",
-  "base_model": {
-    "parent": "item/generated",
-    "textures": {
-      "layer0": "zenhorizon:item/wand"
-    }
-  }
-}
