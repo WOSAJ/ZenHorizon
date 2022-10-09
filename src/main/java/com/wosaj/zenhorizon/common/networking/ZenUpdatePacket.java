@@ -1,6 +1,5 @@
 package com.wosaj.zenhorizon.common.networking;
 
-import com.wosaj.zenhorizon.ZenHorizon;
 import com.wosaj.zenhorizon.common.capability.Zen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;

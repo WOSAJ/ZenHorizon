@@ -3,6 +3,7 @@ package com.wosaj.zenhorizon;
 import com.wosaj.zenhorizon.common.item.Items;
 import com.wosaj.zenhorizon.common.networking.Networking;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -61,5 +62,10 @@ public final class ZenHorizon {
                 () -> new SlotTypeMessage.Builder("ring").size(4).cosmetic().build());
         InterModComms.sendTo("curios", "register_type",
                 () -> new SlotTypeMessage.Builder("charm").size(2).cosmetic().build());
+    }
+
+    //UTIL
+    public static ResourceLocation rl(String val) {
+        return new ResourceLocation(MODID, val);
     }
 }
