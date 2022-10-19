@@ -3,7 +3,7 @@ package com.wosaj.zenhorizon.common.item.curio;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wosaj.zenhorizon.ZenHorizon;
-import com.wosaj.zenhorizon.common.item.Items;
+import com.wosaj.zenhorizon.common.item.ZenHorizonItems;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -23,7 +23,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = ZenHorizon.MODID)
 public class MetaWings extends Item implements ICurioItem {
     public MetaWings() {
-        super(new Properties().rarity(Items.SUPREME).tab(ZenHorizon.GROUP).stacksTo(1));
+        super(new Properties().rarity(ZenHorizonItems.SUPREME).tab(ZenHorizon.GROUP).stacksTo(1));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MetaWings extends Item implements ICurioItem {
     @SubscribeEvent
     public static void onUnequip(CurioUnequipEvent event) {
         if(!(event.getEntity() instanceof Player player)) return;
-        if(event.getStack().getItem() == Items.METAWINGS.get() && !player.isCreative() && !player.isSpectator()) {
+        if(event.getStack().getItem() == ZenHorizonItems.METAWINGS.get() && !player.isCreative() && !player.isSpectator()) {
             player.getAbilities().flying = false;
             player.getAbilities().mayfly = false;
             player.stopFallFlying();

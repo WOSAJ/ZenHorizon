@@ -70,7 +70,7 @@ minecraft {
             }
         }
     }
-  //accessTransformer = file('src/main/resources/META-INF/zenhorizon_at.cfg')
+    accessTransformer = file('src/main/resources/META-INF/zenhorizon_at.cfg')
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

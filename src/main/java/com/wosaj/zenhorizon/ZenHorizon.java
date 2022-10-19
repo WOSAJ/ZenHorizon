@@ -1,8 +1,8 @@
 package com.wosaj.zenhorizon;
 
-import com.wosaj.zenhorizon.common.item.Items;
+import com.wosaj.zenhorizon.common.block.ZenHorizonBlocks;
+import com.wosaj.zenhorizon.common.item.ZenHorizonItems;
 import com.wosaj.zenhorizon.common.networking.Networking;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -23,12 +23,12 @@ import javax.annotation.Nonnull;
 public final class ZenHorizon {
     public static final String MODID = "zenhorizon";
 
-    public static final CreativeModeTab GROUP = new CreativeModeTab(new TranslatableComponent("zenhorizon").getString()) {
+    public static final CreativeModeTab GROUP = new CreativeModeTab(MODID) {
         @OnlyIn(Dist.CLIENT)
         @Nonnull
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(Items.POTION_MASK.get());
+            return new ItemStack(ZenHorizonItems.POTION_MASK.get());
         }
     };
 
@@ -38,7 +38,9 @@ public final class ZenHorizon {
         modEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
         //CONTENT REGISTRATION
-        Items.register(modEventBus);
+        ZenHorizonBlocks.register(modEventBus);
+        ZenHorizonItems.register(modEventBus);
+        ZenHorizonAttributes.register(modEventBus);
         //EntityTypes.register(modEventBus);
     }
 
