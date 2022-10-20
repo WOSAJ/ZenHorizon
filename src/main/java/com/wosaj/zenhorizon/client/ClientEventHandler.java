@@ -36,7 +36,7 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
-    public void onEntityRenderersRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+    public static void onEntityRenderersRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ZenHorizonBlocks.BLACKSTONE_PEDESTAL_TILE.get(),a->new BlackstonePedestalTileRenderer());
     }
 }
