@@ -1,7 +1,33 @@
-# Project exclude paths
-/src/main/java/com/wosaj/zenhorizon/GameTests.java
-/.gradle/
-/build/
-/build/classes/java/main/
-/.idea/
-/run/
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
