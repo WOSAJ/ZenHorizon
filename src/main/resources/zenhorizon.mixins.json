@@ -1,15 +1,9 @@
 {
-  "required": true,
-  "package": "com.wosaj.zenhorizon.mixin",
+  "minVersion": "0.8",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-  ],
-  "client": [
-  ],
-  "server": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  "package": "com.wosaj.zenhorizon.mixin",
+  "refmap": "mixins.zenhorizon.refmap.json",
+  "mixins": [],
+  "client": [],
+  "server": []
 }
-

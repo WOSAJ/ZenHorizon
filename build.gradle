@@ -1,78 +1,95 @@
-plugins {
-    id "dev.architectury.loom" version "0.12.0-SNAPSHOT"
-    id "maven-publish"
-}
-
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
-
-loom {
-    silentMojangMappingsLicense()
-
-    forge {
-        mixinConfigs = [
-                "zenhorizon.mixins.json"
-        ]
-
-        dataGen {
-            mod project.mod_id
-        }
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        mavenCentral()
     }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-    launches {
+version = '1.0_ALPHA'
+group = 'com.wosaj.zenhorizon'
+archivesBaseName = 'zenhorizon'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+minecraft {
+    mappings channel: 'parchment', version: '2022.09.04-1.18.2'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            mods {
+                zenhorizon {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            mods {
+                zenhorizon {
+                    source sourceSets.main
+                }
+            }
+        }
+
         data {
-            arg "--existing", file("src/main/resources").absolutePath
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'zenhorizon', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                zenhrizon {
+                    source sourceSets.main
+                }
+            }
         }
     }
+    accessTransformer = file('src/main/resources/META-INF/zenhorizon_at.cfg')
 }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	maven {
-		name = "Progwml6 maven"
-		url = "https://dvs1.progwml6.com/files/maven/"
-	}
-    maven {
-        name "blamejared"
-        url "https://maven.blamejared.com/"
-    }
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
+    maven { url = 'https://maven.blamejared.com' }
+    maven { url = "https://maven.theillusivec4.top/" }
+    maven { url = 'https://cursemaven.com' }
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-
-    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-	modRuntimeOnly "top.theillusivec4.curios:curios-forge:${project.minecraft_version}-${project.curios_version}:api"
-	modCompileOnly "top.theillusivec4.curios:curios-forge:${project.minecraft_version}-${project.curios_version}"
-
-    modRuntimeOnly "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}"
-    modCompileOnly "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}:api"
-
-    modImplementation "mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}"
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
-    }
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-    options.release = 17
-}
-
-java {
-    withSourcesJar()
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.52'
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1:api")
+    runtimeOnly fg.deobf("curse.maven:jei-238222:3969092")
+    compileOnly fg.deobf("curse.maven:jei-238222:3969092")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
@@ -83,21 +100,69 @@ jar {
             "Specification-Version": "1",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"zenhorizon"
+            "Implementation-Vendor" :"zenhorizon",
+            "MixinConfigs": "zenhorizon.mixins.json"
         ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+
+mixin {
+    add sourceSets.main, "ars_nouveau.refmap.json"
+    reobfSrgFile = file("${buildDir}/fixMcpToSrg/output.tsrg")
+}
+
+// Generate a fixed tsrg file after generating the default tsrg file
+createMcpToSrg {
+    outputs.upToDateWhen {false}
+    doLast {
+        fixFG5TsrgForMixinAP(output.get().asFile, file("${buildDir}/fixMcpToSrg/output.tsrg"))
+    }
+}
+
+// Function that actually fixes the TSRG file
+static def fixFG5TsrgForMixinAP(File inFile, File outFile) {
+    // Make directory if needed
+    outFile.parentFile.mkdirs()
+
+    try (Scanner scanner = new Scanner(inFile); PrintWriter out = new PrintWriter(outFile)) {
+        boolean firstLine = true
+        while (scanner.hasNextLine()) {
+            String next = scanner.nextLine()
+
+            // Skip first 'tsrg left right' header line
+            if (firstLine) {
+                firstLine = false
+                continue
+            }
+
+            // Skip 'static' indicators
+            if (next.trim() == "static") {
+                continue
+            }
+
+            // Export line otherwise
+            out.println(next)
+        }
+    }
+}
+
+
+// Copied from Botania
+if (System.getProperty("idea.sync.active") == "true") {
+    afterEvaluate {
+        tasks.withType(JavaCompile).all {
+            it.options.annotationProcessorPath = files()
+        }
     }
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+            artifact jar
         }
     }
     repositories {
