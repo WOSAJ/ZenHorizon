@@ -49,8 +49,12 @@ dependencies {
 
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    modImplementation "top.theillusivec4.curios:curios-forge:${project.minecraft_version}-${project.curios_version}"
-    modImplementation "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}"
+	modRuntimeOnly "top.theillusivec4.curios:curios-forge:${project.minecraft_version}-${project.curios_version}:api"
+	modCompileOnly "top.theillusivec4.curios:curios-forge:${project.minecraft_version}-${project.curios_version}"
+
+    modRuntimeOnly "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}"
+    modCompileOnly "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}:api"
+
     modImplementation "mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}"
 }
 

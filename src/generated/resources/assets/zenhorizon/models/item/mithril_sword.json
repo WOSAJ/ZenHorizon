@@ -1,6 +1,0 @@
-{
-  "parent": "zenhorizon:item/big_handheld",
-  "textures": {
-    "layer0": "zenhorizon:item/mithril_sword"
-  }
-}
