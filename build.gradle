@@ -78,12 +78,12 @@ java {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : project.mod_id,
-                "Specification-Vendor"    : project.mod_author,
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : version,
-                "Implementation-Vendor"   : project.mod_author
+            "Specification-Title": "zenhorizon",
+            "Specification-Vendor": "zenhorizon",
+            "Specification-Version": "1",
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"zenhorizon"
         ])
     }
 }
@@ -91,6 +91,7 @@ jar {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
             artifact(remapJar) {
                 builtBy remapJar
             }
