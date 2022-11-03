@@ -32,6 +32,7 @@ public class BlackstonePedestalTile extends ZenHorizonTile implements Container 
         super(ZenHorizonBlocks.BLACKSTONE_PEDESTAL_TILE.get(), pos, state);
     }
 
+    @SuppressWarnings("all")
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);

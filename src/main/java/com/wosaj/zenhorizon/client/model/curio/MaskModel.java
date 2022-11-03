@@ -1,4 +1,4 @@
-package com.wosaj.zenhorizon.client.model;
+package com.wosaj.zenhorizon.client.model.curio;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -9,11 +9,10 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
 public class MaskModel<T extends Entity> extends AgeableListModel<T> {
-	public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ZenHorizon.MODID, "mask"), "mask");
+	public static final ModelLayerLocation LAYER = new ModelLayerLocation(ZenHorizon.rl("mask"), "curio");
 	public final ModelPart mask;
 
 	public MaskModel(ModelPart root) {

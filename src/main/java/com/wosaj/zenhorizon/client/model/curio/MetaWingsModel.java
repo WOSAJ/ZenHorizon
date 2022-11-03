@@ -1,4 +1,4 @@
-package com.wosaj.zenhorizon.client.model;
+package com.wosaj.zenhorizon.client.model.curio;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Player;
 @javax.annotation.ParametersAreNonnullByDefault
 public class MetaWingsModel<T extends Entity> extends AgeableListModel<T> {
 	public static final double ANIM_ROT_ANGLE = Math.toRadians(45);
-	public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(ZenHorizon.MODID, "metawings"), "metawings");
+	public static final ModelLayerLocation LAYER = new ModelLayerLocation(ZenHorizon.rl("metawings"), "curio");
 	private final ModelPart leftWing;
 	private final ModelPart rightWing;
 

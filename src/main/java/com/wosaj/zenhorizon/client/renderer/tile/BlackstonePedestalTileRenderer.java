@@ -14,12 +14,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class BlackstonePedestalTileRenderer implements BlockEntityRenderer<BlackstonePedestalTile> {
     @Override
     public void render(BlackstonePedestalTile tileEntityIn, float v, PoseStack matrixStack, MultiBufferSource iRenderTypeBuffer, int i, int i1) {
+        if(tileEntityIn.getLevel() == null || tileEntityIn.getStack() == null) return;
+
         double x = tileEntityIn.getBlockPos().getX();
         double y = tileEntityIn.getBlockPos().getY();
         double z = tileEntityIn.getBlockPos().getZ();
-
-        if(tileEntityIn.getStack() == null)
-            return;
 
         if (tileEntityIn.entity == null || !ItemStack.matches(tileEntityIn.entity.getItem(), tileEntityIn.getStack())) {
             tileEntityIn.entity = new ItemEntity(tileEntityIn.getLevel(), x, y, z, tileEntityIn.getStack());
@@ -27,10 +26,10 @@ public class BlackstonePedestalTileRenderer implements BlockEntityRenderer<Black
 
         ItemEntity entityItem = tileEntityIn.entity;
         matrixStack.pushPose();
-        tileEntityIn.frames += 1.5f * Minecraft.getInstance().getDeltaFrameTime();
+        tileEntityIn.frames += Minecraft.getInstance().getDeltaFrameTime();
         entityItem.setYHeadRot(tileEntityIn.frames);
         entityItem.age = (int) tileEntityIn.frames;
-        Minecraft.getInstance().getEntityRenderDispatcher().render(entityItem, 0.5,1,0.5, entityItem.getYRot(), 2.0f,matrixStack, iRenderTypeBuffer,i);
+        Minecraft.getInstance().getEntityRenderDispatcher().render(entityItem, 0.5,1.5,0.5, entityItem.getYRot(), 2.0f,matrixStack, iRenderTypeBuffer,i);
 
         matrixStack.popPose();
     }

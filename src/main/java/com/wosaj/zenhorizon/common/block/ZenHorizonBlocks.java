@@ -17,6 +17,8 @@ public final class ZenHorizonBlocks {
     public static void register(IEventBus bus){REG.register(bus);TREG.register(bus);}
 
     public static final RegistryObject<Block> BLACKSTONE_PEDESTAL = REG.register("blackstone_pedestal", BlackstonePedestal::new);
-    public static final RegistryObject<BlockEntityType<BlackstonePedestalTile>> BLACKSTONE_PEDESTAL_TILE = TREG.register("blackstone_pedestal_tile", () -> BlockEntityType.Builder.of(BlackstonePedestalTile::new).build(null));
+    public static final RegistryObject<BlockEntityType<BlackstonePedestalTile>> BLACKSTONE_PEDESTAL_TILE = TREG.register("blackstone_pedestal_tile", () -> BlockEntityType.Builder.of(BlackstonePedestalTile::new, BLACKSTONE_PEDESTAL.get()).build(null));
 
+    public static final RegistryObject<Block> ALTAR_PRISM = REG.register("altar_prism", AltarPrism::new);
+    public static final RegistryObject<BlockEntityType<AltarPrismTile>> ALTAR_PRISM_TILE = TREG.register("altar_prism_tile", () -> BlockEntityType.Builder.of(AltarPrismTile::new, ALTAR_PRISM.get()).build(null));
 }

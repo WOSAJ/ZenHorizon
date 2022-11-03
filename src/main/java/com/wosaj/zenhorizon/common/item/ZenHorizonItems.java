@@ -38,6 +38,7 @@ public final class ZenHorizonItems {
     public static final RegistryObject<Item> MITHRIL_SWORD = REG.register("mithril_sword", () -> new SwordItem(ZenHorizonTiers.MITHRIL, 3, -2.2F, prop().rarity(ENHANCED)));
 
     public static final RegistryObject<Item> BLACKSTONE_PEDESTAL = REG.register("blackstone_pedestal", () -> new BlockItem(ZenHorizonBlocks.BLACKSTONE_PEDESTAL.get(), prop()));
+    public static final RegistryObject<Item> ALTAR_PRISM = REG.register("altar_prism", () -> new BlockItem(ZenHorizonBlocks.ALTAR_PRISM.get(), prop()));
 
     public static final RegistryObject<Item> POTION_MASK = REG.register("potion_mask", PotionMask::new);
     public static final RegistryObject<Item> METAWINGS = REG.register("metawings", MetaWings::new);

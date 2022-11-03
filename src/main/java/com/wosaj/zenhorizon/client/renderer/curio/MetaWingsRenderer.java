@@ -3,7 +3,7 @@ package com.wosaj.zenhorizon.client.renderer.curio;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wosaj.zenhorizon.ZenHorizon;
-import com.wosaj.zenhorizon.client.model.MetaWingsModel;
+import com.wosaj.zenhorizon.client.model.curio.MetaWingsModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
