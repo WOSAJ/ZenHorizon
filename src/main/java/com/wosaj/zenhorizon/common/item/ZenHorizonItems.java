@@ -22,7 +22,7 @@ public final class ZenHorizonItems {
     //UNCOMMON
     public static final Rarity ENHANCED = create("enhanced", ChatFormatting.BLUE);
     //RARE
-    public static final Rarity RELIC = create("relic", s -> s.applyFormats(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
+    public static final Rarity RELIC = create("relic", s -> s.applyFormats(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
     public static final Rarity MYTHIC = create("mythic", ChatFormatting.RED);
     //EPIC
     public static final Rarity LEGENDARY = create("legendary", ChatFormatting.GOLD);
@@ -38,9 +38,8 @@ public final class ZenHorizonItems {
     public static final RegistryObject<Item> MITHRIL_SWORD = REG.register("mithril_sword", () -> new SwordItem(ZenHorizonTiers.MITHRIL, 3, -2.2F, prop().rarity(ENHANCED)));
 
     public static final RegistryObject<Item> BLACKSTONE_PEDESTAL = REG.register("blackstone_pedestal", () -> new BlockItem(ZenHorizonBlocks.BLACKSTONE_PEDESTAL.get(), prop()));
-    public static final RegistryObject<Item> ALTAR_PRISM = REG.register("altar_prism", () -> new BlockItem(ZenHorizonBlocks.ALTAR_PRISM.get(), prop()));
+    public static final RegistryObject<Item> ALTAR_PRISM = REG.register("altar_prism", () -> new BlockItem(ZenHorizonBlocks.ALTAR_PRISM.get(), prop().rarity(ENHANCED)));
 
     public static final RegistryObject<Item> POTION_MASK = REG.register("potion_mask", PotionMask::new);
     public static final RegistryObject<Item> METAWINGS = REG.register("metawings", MetaWings::new);
-
 }

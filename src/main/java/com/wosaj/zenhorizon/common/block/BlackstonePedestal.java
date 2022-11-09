@@ -1,5 +1,6 @@
 package com.wosaj.zenhorizon.common.block;
 
+import com.wosaj.zenhorizon.ZenHorizon;
 import com.wosaj.zenhorizon.common.block.tile.BlackstonePedestalTile;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -8,8 +9,10 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -23,6 +26,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -45,27 +49,25 @@ public class BlackstonePedestal extends Block implements EntityBlock, SimpleWate
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if(handIn != InteractionHand.MAIN_HAND)
-            return InteractionResult.PASS;
+        if(handIn != InteractionHand.MAIN_HAND) return InteractionResult.PASS;
         if(!world.isClientSide && world.getBlockEntity(pos) instanceof BlackstonePedestalTile tile) {
-            if (tile.getStack() != null && player.getItemInHand(handIn).isEmpty()) {
-                if(world.getBlockState(pos.above()).getMaterial() != Material.AIR)
-                    return InteractionResult.SUCCESS;
-                ItemEntity item = new ItemEntity(world, player.getX(), player.getY(), player.getZ(), tile.getStack());
-                world.addFreshEntity(item);
+            if(world.getBlockState(pos.above()).getMaterial() != Material.AIR) return InteractionResult.SUCCESS;
+            if(tile.getStack() != null && player.getItemInHand(handIn).isEmpty()) {
+                spawnItem(world, player, tile);
                 tile.setStack(ItemStack.EMPTY);
-            } else if (!player.getInventory().getSelected().isEmpty()) {
-                if(tile.getStack() != null){
-                    ItemEntity item = new ItemEntity(world, player.getX(), player.getY(), player.getZ(), tile.getStack());
-                    world.addFreshEntity(item);
-                }
-
+            } else if(!player.getInventory().getSelected().isEmpty()) {
+                if(tile.getStack() != null) spawnItem(world, player, tile);
                 tile.setStack(player.getInventory().removeItem(player.getInventory().selected, 1));
-
             }
             world.sendBlockUpdated(pos, state, state, 2);
         }
         return  InteractionResult.SUCCESS;
+    }
+
+    private void spawnItem(Level world, Player player, BlackstonePedestalTile tile) {
+        assert tile.getStack() != null;
+        ItemEntity item = new ItemEntity(world, player.getX(), player.getY(), player.getZ(), tile.getStack());
+        world.addFreshEntity(item);
     }
 
     @Override
@@ -108,4 +110,6 @@ public class BlackstonePedestal extends Block implements EntityBlock, SimpleWate
         }
         return stateIn;
     }
+
+    public interface UpperPlaceable {}
 }

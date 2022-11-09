@@ -89,8 +89,7 @@ public class BlackstonePedestalTile extends ZenHorizonTile implements Container 
 
     @Override
     public void setItem(int index, ItemStack s) {
-        stack = s;
-        updateBlock();
+        setStack(s);
     }
 
     @Override
@@ -101,7 +100,7 @@ public class BlackstonePedestalTile extends ZenHorizonTile implements Container 
 
     @Override
     public void clearContent() {
-        this.stack = ItemStack.EMPTY;
+        setStack(ItemStack.EMPTY);
     }
 
 

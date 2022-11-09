@@ -16,5 +16,6 @@ public class ZenHorizonBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlock(ZenHorizonBlocks.BLACKSTONE_PEDESTAL.get(), models().getExistingFile(modLoc("blackstone_pedestal")));
+        simpleBlock(ZenHorizonBlocks.ALTAR_PRISM.get(), models().getExistingFile(modLoc("altar_prism")));
     }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "zenhorizon:altar_crafting",
+  "reagent": {
+    "item": "minecraft:iron_pickaxe"
+  },
+  "items": [
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "duration": 200,
+  "keepNbt": true,
+  "output": {
+    "item": "minecraft:netherite_pickaxe"
+  }
+}

@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -43,6 +44,4 @@ public class ClientEventHandler {
         event.registerBlockEntityRenderer(ZenHorizonBlocks.BLACKSTONE_PEDESTAL_TILE.get(),a->new BlackstonePedestalTileRenderer());
         event.registerBlockEntityRenderer(ZenHorizonBlocks.ALTAR_PRISM_TILE.get(), AltarPrismTileRenderer::new);
     }
-
-
 }

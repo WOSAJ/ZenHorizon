@@ -1,0 +1,21 @@
+{
+  "type": "zenhorizon:altar_crafting",
+  "reagent": {
+    "item": "minecraft:dirt"
+  },
+  "items": [
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "zenhorizon:mithril_ingot"
+    }
+  ],
+  "duration": 100,
+  "output": {
+    "item": "minecraft:diamond_block"
+  }
+}
